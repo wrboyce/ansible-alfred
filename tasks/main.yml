@@ -1,0 +1,24 @@
+---
+- name: install App
+  homebrew_cask: name=alfred state=present
+  tags: [alfred]
+
+- name: set powerpack license email
+  osx_defaults: domain="/Users/wrboyce/Library/Application Support/Alfred 3/license.plist" key=email type=string value={{ alfred_pp_email }}
+  when: alfred_pp_email is defined
+  tags: [alfred]
+
+- name: set powerpack license code
+  osx_defaults: domain="/Users/wrboyce/Library/Application Support/Alfred 3/license.plist" key=code type=string value={{ alfred_pp_code }}
+  when: alfred_pp_code is defined
+  tags: [alfred]
+
+- name: set powerpack license hash
+  osx_defaults: domain="/Users/wrboyce/Library/Application Support/Alfred 3/license.plist" key=hash type=string value={{ alfred_pp_hash }}
+  when: alfred_pp_hash is defined
+  tags: [alfred]
+
+- name: set custom prefs folder
+  osx_defaults: domain=com.runningwithcrayons.Alfred-Preferences-3 key=syncfolder type=string value={{ alfred_prefs_folder }}
+  when: alfred_prefs_folder is defined
+  tags: [alfred]
